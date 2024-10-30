@@ -42,10 +42,70 @@ style.textContent = `
 
 .diogenes-error {
   color: #dc3545;
-  padding: 10px;
+  padding: 16px;
   margin: 10px 0;
   background: #f8d7da;
   border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.diogenes-error a {
+  color: #dc2626;
+  text-decoration: underline;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.diogenes-error a:hover {
+  color: #b91c1c;
+}
+
+.diogenes-json-container {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.diogenes-json-toggle {
+  background: none;
+  border: 1px solid #dc3545;
+  color: #dc3545;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.diogenes-json-toggle:hover {
+  background: rgba(220, 53, 69, 0.1);
+}
+
+.diogenes-json-content {
+  background: #fff;
+  border: 1px solid #dc3545;
+  border-radius: 4px;
+  padding: 12px;
+  font-family: monospace;
+  font-size: 12px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.diogenes-retry-link {
+  color: #dc2626;
+  text-decoration: underline;
+  margin-top: 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.diogenes-retry-link:hover {
+  color: #b91c1c;
 }
 
 .diogenes-results h1 { font-size: 1.8em; margin: 0.8em 0; }
@@ -262,14 +322,71 @@ ${pageContent}`;
         resultsDiv.appendChild(contentDiv);
 
     } catch (error) {
-        console.error('Error in analysis:', error);
+                console.error('Error in analysis:', error);
         loadingDiv.remove();
-        
+
         const errorDiv = document.createElement('div');
         errorDiv.className = 'diogenes-error';
-        errorDiv.textContent = error.name === 'AbortError' 
+
+        const errorMessage = document.createElement('div');
+        errorMessage.textContent = error.name === 'AbortError'
             ? 'Analysis timed out. Please try again with a smaller selection of text.'
             : `Error analyzing content: ${error.message}`;
+        errorDiv.appendChild(errorMessage);
+
+        // Add JSON response section
+        const jsonContainer = document.createElement('div');
+        jsonContainer.className = 'diogenes-json-container';
+
+        const jsonToggle = document.createElement('button');
+        jsonToggle.textContent = 'Show Response Details';
+        jsonToggle.className = 'diogenes-json-toggle';
+
+        const jsonContent = document.createElement('pre');
+        jsonContent.className = 'diogenes-json-content';
+        jsonContent.style.display = 'none';
+
+        // Format the error response
+        let responseText = '';
+        if (error.response) {
+            try {
+                const responseData = await error.response.json();
+                responseText = formatJSON(responseData);
+            } catch (e) {
+                responseText = 'Unable to parse response data: ' + e.message;
+            }
+        } else {
+            responseText = formatJSON({
+                error: error.message,
+                stack: error.stack,
+                name: error.name
+            });
+        }
+
+        jsonContent.textContent = responseText;
+
+        jsonToggle.onclick = () => {
+            const isHidden = jsonContent.style.display === 'none';
+            jsonContent.style.display = isHidden ? 'block' : 'none';
+            jsonToggle.textContent = isHidden ? 'Hide Response Details' : 'Show Response Details';
+        };
+
+        jsonContainer.appendChild(jsonToggle);
+        jsonContainer.appendChild(jsonContent);
+        errorDiv.appendChild(jsonContainer);
+
+        const retryLink = document.createElement('a');
+        retryLink.textContent = 'Try Again';
+        retryLink.href = '#';
+        retryLink.className = 'diogenes-retry-link';
+
+        retryLink.onclick = async (e) => {
+            e.preventDefault();
+            errorDiv.remove();
+            await analyzeContent(pageContent, apiKey);
+        };
+
+        errorDiv.appendChild(retryLink);
         resultsDiv.appendChild(errorDiv);
     }
 }
