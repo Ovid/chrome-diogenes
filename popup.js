@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
     // Get all required DOM elements
+    const mainInterface = document.getElementById('mainInterface');
     const apiKeyForm = document.getElementById('apiKeyForm');
     const mainContent = document.getElementById('mainContent');
     const apiKeyInput = document.getElementById('apiKeyInput');
@@ -7,32 +8,34 @@ document.addEventListener('DOMContentLoaded', async () => {
     const analyzeButton = document.getElementById('analyze');
     const replaceApiKeyButton = document.getElementById('replaceApiKey');
     const deleteApiKeyButton = document.getElementById('deleteApiKey');
+    const helpSection = document.getElementById('helpSection');
+    const helpLink = document.getElementById('helpLink');
+    const backToMain = document.getElementById('backToMain');
+    const backToMainBottom = document.getElementById('backToMainBottom');
     const statusDiv = document.getElementById('status');
 
     // Helper function to show status messages
     function showStatus(message, isError = false) {
-        console.log('Status:', message, isError); // Debug log
         statusDiv.textContent = message;
         statusDiv.style.display = 'block';
-        statusDiv.className = isError ? 'status error' : 'status success';
+        statusDiv.className = `status ${isError ? 'error' : 'success'}`;
         setTimeout(() => {
             statusDiv.style.display = 'none';
         }, 3000);
     }
 
-    // Check if API key exists
+    // Check if API key exists and show appropriate section
     const { apiKey } = await chrome.storage.local.get('apiKey');
-    if (!apiKey) {
-        apiKeyForm.style.display = 'block';
-        mainContent.style.display = 'none';
-    } else {
+    if (apiKey) {
         apiKeyForm.style.display = 'none';
         mainContent.style.display = 'block';
+    } else {
+        apiKeyForm.style.display = 'block';
+        mainContent.style.display = 'none';
     }
 
     // Save API key
     saveApiKeyButton?.addEventListener('click', async () => {
-        console.log('Save API key clicked'); // Debug log
         const newApiKey = apiKeyInput.value.trim();
         if (!newApiKey) {
             showStatus('Please enter an API key', true);
@@ -40,7 +43,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         try {
-            // Validate API key using background script
             const response = await chrome.runtime.sendMessage({
                 type: 'validateApiKey',
                 apiKey: newApiKey
@@ -63,14 +65,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Replace API key button handler
     replaceApiKeyButton?.addEventListener('click', () => {
-        console.log('Replace API key clicked'); // Debug log
         mainContent.style.display = 'none';
         apiKeyForm.style.display = 'block';
     });
 
     // Delete API key button handler
     deleteApiKeyButton?.addEventListener('click', async () => {
-        console.log('Delete API key clicked'); // Debug log
         try {
             await chrome.storage.local.remove('apiKey');
             mainContent.style.display = 'none';
@@ -84,7 +84,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Analyze button click handler
     analyzeButton?.addEventListener('click', async () => {
-        console.log('Analyze clicked'); // Debug log
         try {
             const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
             chrome.tabs.sendMessage(tab.id, { action: 'analyze' });
@@ -93,5 +92,20 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error('Error during analysis:', error);
             showStatus('Error analyzing page', true);
         }
+    });
+
+    // Help navigation handlers
+    helpLink?.addEventListener('click', () => {
+        mainInterface.style.display = 'none';
+        helpSection.style.display = 'block';
+    });
+
+    backToMain?.addEventListener('click', () => {
+        helpSection.style.display = 'none';
+        mainInterface.style.display = 'block';
+    });
+    backToMainBottom?.addEventListener('click', () => {
+        helpSection.style.display = 'none';
+        mainInterface.style.display = 'block';
     });
 });

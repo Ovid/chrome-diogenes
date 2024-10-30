@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Diogenes</title>
+  <meta charset="UTF-8">
   <style>
 .container {
   width: 300px;
@@ -30,6 +31,7 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   margin-bottom: 8px;
+  font-size: 16px;
 }
 
 .button {
@@ -80,28 +82,122 @@
   background-color: #dcfce7;
   color: #16a34a;
 }
+
+.nav-link {
+  color: #2563eb;
+  text-decoration: none;
+  font-size: 14px;
+  display: inline-block;
+  margin-top: 12px;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+.help-section {
+  display: none;
+}
+
+.help-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #374151;
+}
+
+.help-list {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.help-list li {
+  margin-bottom: 12px;
+}
+
+.back-link {
+  display: inline-block;
+  color: #4b5563;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  padding-left: 20px;
+  position: relative;
+}
+
+.back-link:hover {
+  color: #1f2937;
+}
+
+.back-link:before {
+  content: "←";
+  position: absolute;
+  left: 0;
+}
+
+/* Hide sections by default */
+#apiKeyForm, #mainContent {
+  display: none;
+}
   </style>
 </head>
 <body>
   <div class="container">
-    <div id="apiKeyForm" class="section" style="display: none;">
-      <div class="title">Enter Gemini API Key</div>
-      <div class="form-group">
-        <input type="password" id="apiKeyInput" class="input" placeholder="Enter API key">
-        <button id="saveApiKey" class="button">Save API Key</button>
+    <!-- Main Interface -->
+    <div id="mainInterface">
+      <div id="apiKeyForm" class="section">
+        <div class="title">Enter Gemini API Key</div>
+        <div class="form-group">
+          <input type="password" id="apiKeyInput" class="input" placeholder="Enter API key">
+          <button id="saveApiKey" class="button">Save API Key</button>
+        </div>
       </div>
+
+      <div id="mainContent" class="section">
+        <div class="title">Diogenes Analysis</div>
+        <div class="form-group">
+          <button id="analyze" class="button">Analyze Page</button>
+          <button id="replaceApiKey" class="button secondary">Replace API Key</button>
+          <button id="deleteApiKey" class="button danger">Delete API Key</button>
+        </div>
+      </div>
+
+      <div id="status" class="status"></div>
+      
+      <a class="nav-link" id="helpLink">Help & Instructions</a>
     </div>
 
-    <div id="mainContent" class="section" style="display: none;">
-      <div class="title">Diogenes Analysis</div>
-      <div class="form-group">
-        <button id="analyze" class="button">Analyze Page</button>
-        <button id="replaceApiKey" class="button secondary">Replace API Key</button>
-        <button id="deleteApiKey" class="button danger">Delete API Key</button>
-      </div>
+    <!-- Help Section -->
+    <div id="helpSection" class="help-section">
+      <a id="backToMain" class="back-link">Back to Main</a>
+      
+      <h2 class="title">How to Use Diogenes</h2>
+      
+      <ul class="help-list">
+        <li>
+          <b>Set up API Key:</b> Before first use, you'll need to enter your Gemini API key. You can get this from <a href="https://ai.google.dev/" target="_blank">Google AI Studio.</a> and clicking on the <a href="https://aistudio.google.com/app/apikey" target="_blank">Get API key in Google AI Studio</a> link. Note that this key is free to use, but there is a limit to how often you can use it. To increase your limit, on the "Get API key in Google AI Studio" page, click on the "Go to billing" link and follow the instructions.
+        </li>
+        
+        <li>
+          <b>Analyze Pages:</b> Once your API key is set, click "Analyze Page" on any webpage to examine its logical structure and argumentation.
+        </li>
+        
+        <li>
+          <b>View Results:</b> The analysis will appear in an overlay on the webpage, showing logical fallacies, factual claims, and overall argument strength.
+        </li>
+        
+        <li>
+          <b>Managing API Key:</b> You can replace or delete your API key at any time using the buttons in the main interface.
+        </li>
+        
+        <li>
+          <b>Note:</b> The analysis works best on articles, blog posts, and other text-heavy content that presents arguments or opinions.
+        </li>
+      </ul>
+      <a id="backToMainBottom" class="back-link">Back to Main</a>
     </div>
-
-    <div id="status" class="status"></div>
   </div>
 
   <script src="popup.js"></script>
