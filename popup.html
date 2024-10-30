@@ -3,127 +3,107 @@
 <head>
   <title>Diogenes</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+.container {
+  width: 300px;
+  padding: 16px;
+  font-family: system-ui, -apple-system, sans-serif;
+}
 
-    body {
-      width: 320px;
-      padding: 16px;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      background: #f8f9fa;
-    }
+.section {
+  margin-bottom: 16px;
+}
 
-    h3 {
-      color: #1a1a1a;
-      margin-bottom: 16px;
-      font-size: 18px;
-      font-weight: 600;
-    }
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #1a1a1a;
+}
 
-    input {
-      width: 100%;
-      padding: 10px 12px;
-      margin-bottom: 12px;
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
-      font-size: 14px;
-      transition: all 0.2s ease;
-    }
+.form-group {
+  margin-bottom: 12px;
+}
 
-    input:focus {
-      outline: none;
-      border-color: #4a90e2;
-      box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
-    }
+.input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
 
-    button {
-      width: 100%;
-      padding: 10px 16px;
-      background: #4a90e2;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
+.button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
+  margin-bottom: 8px;
+}
 
-    button:hover {
-      background: #357abd;
-      transform: translateY(-1px);
-    }
+.button:hover {
+  background-color: #1d4ed8;
+}
 
-    button:active {
-      transform: translateY(0);
-    }
+.button.secondary {
+  background-color: #4b5563;
+}
 
-    #status {
-      margin-top: 12px;
-      padding: 8px;
-      border-radius: 6px;
-      font-size: 14px;
-      text-align: center;
-    }
+.button.secondary:hover {
+  background-color: #374151;
+}
 
-    .error {
-      color: #dc3545;
-      background: #f8d7da;
-      border: 1px solid #f5c6cb;
-    }
+.button.danger {
+  background-color: #dc2626;
+}
 
-    .success {
-      color: #28a745;
-      background: #d4edda;
-      border: 1px solid #c3e6cb;
-    }
+.button.danger:hover {
+  background-color: #b91c1c;
+}
 
-    .container {
-      background: white;
-      padding: 16px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    }
+.status {
+  padding: 8px;
+  border-radius: 4px;
+  margin-top: 8px;
+  display: none;
+}
 
-    #apiKeyForm, #mainContent {
-      display: none;
-    }
+.status.error {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
 
-    /* Loading indicator for analyze button */
-    .loading {
-      opacity: 0.7;
-      cursor: wait;
-    }
-
-    .loading:after {
-      content: '...';
-      animation: dots 1.5s steps(5, end) infinite;
-    }
-
-    @keyframes dots {
-      0%, 20% { content: '.'; }
-      40% { content: '..'; }
-      60% { content: '...'; }
-      80%, 100% { content: ''; }
-    }
+.status.success {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
   </style>
 </head>
 <body>
   <div class="container">
-    <div id="apiKeyForm">
-      <h3>Enter Gemini API Key</h3>
-      <input type="text" id="apiKeyInput" placeholder="Paste your API key here">
-      <button id="saveApiKey">Save API Key</button>
+    <div id="apiKeyForm" class="section" style="display: none;">
+      <div class="title">Enter Gemini API Key</div>
+      <div class="form-group">
+        <input type="password" id="apiKeyInput" class="input" placeholder="Enter API key">
+        <button id="saveApiKey" class="button">Save API Key</button>
+      </div>
     </div>
-    <div id="mainContent">
-      <h3>Diogenes Analysis</h3>
-      <button id="analyze">Analyze Page</button>
+
+    <div id="mainContent" class="section" style="display: none;">
+      <div class="title">Diogenes Analysis</div>
+      <div class="form-group">
+        <button id="analyze" class="button">Analyze Page</button>
+        <button id="replaceApiKey" class="button secondary">Replace API Key</button>
+        <button id="deleteApiKey" class="button danger">Delete API Key</button>
+      </div>
     </div>
-    <div id="status"></div>
+
+    <div id="status" class="status"></div>
   </div>
+
   <script src="popup.js"></script>
 </body>
 </html>
