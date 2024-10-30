@@ -34,7 +34,8 @@ This project is licensed under the MIT license.
 When you first run the plugin, you will be asked to provide an API key. You
 can get one at [ai.google.dev](https://ai.google.dev/). Once you have the key,
 you can click on the Diogenes icon and paste the key in the input field. You
-will only need to do this once.
+will only need to do this once. This API is free to use, but there are limits.
+See "Billing" at the bottom of this document for more information.
 
 This key is stored in your browser's local storage and is used to make
 requests. It is not shared with anyone.
@@ -103,3 +104,23 @@ This is a _weak argument_. The author makes several inaccurate factual claims an
 * The Flat Earth Society's claims about the Bedford Level Experiment, space travel, and photographic evidence are not supported by credible evidence.
 * The Flat Earth Society's model of the Earth does not explain many observed phenomena, such as the phases of the Moon, the fact that the Sun and Moon appear to be the same size in the sky, and the fact that different stars are visible from different parts of the Earth.
 
+---
+
+# Billing
+
+To use this plugin, you need a Google API Key. You
+can get one at [ai.google.dev](https://ai.google.dev/). Once there,
+click the link which reads "Get API Key in Google AI Studio".
+
+![image](https://github.com/user-attachments/assets/fc44554e-81f5-4c25-8763-38227be209e3)
+
+On the following page, click "Create API Key."
+
+![image](https://github.com/user-attachments/assets/2d46c1e2-5f7f-4b50-b257-616a05cc5fde)
+
+This key is free to use! No costs to you for this service. However, the number of requests
+you can make are limited. If you use this frequently, click the "Go to Billing" link at the
+bottom right of the page to set up payment.
+
+If you lose your API key, you can revisit this page and either generate a new key, or click
+on your existing API key and click "Copy" in the popop which appears.
