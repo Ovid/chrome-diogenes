@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <!-- Lantern frame -->
+    <path d="M35 20 L65 20 L65 80 L35 80 Z" fill="none" stroke="#666" stroke-width="4"/>
+    
+    <!-- Top of lantern -->
+    <path d="M30 20 L70 20 L65 15 L35 15 Z" fill="#666"/>
+    
+    <!-- Bottom of lantern -->
+    <path d="M35 80 L65 80 L70 85 L30 85 Z" fill="#666"/>
+    
+    <!-- Glass panels -->
+    <path d="M35 20 L65 20 L65 80 L35 80 Z" fill="#f0f0f0" fill-opacity="0.3"/>
+    
+    <!-- Animated flame -->
+    <g transform="translate(50,50)">
+        <path d="M-8 10 Q0 -20 8 10 Q0 0 -8 10" fill="#FF9900">
+            <animate attributeName="d" 
+                     dur="1.5s"
+                     repeatCount="indefinite"
+                     values="M-8 10 Q0 -20 8 10 Q0 0 -8 10;
+                            M-7 10 Q0 -18 7 10 Q0 2 -7 10;
+                            M-8 10 Q0 -20 8 10 Q0 0 -8 10"/>
+        </path>
+        <path d="M-5 8 Q0 -10 5 8 Q0 2 -5 8" fill="#FFD700">
+            <animate attributeName="d"
+                     dur="1.5s"
+                     repeatCount="indefinite"
+                     values="M-5 8 Q0 -10 5 8 Q0 2 -5 8;
+                            M-4 8 Q0 -8 4 8 Q0 4 -4 8;
+                            M-5 8 Q0 -10 5 8 Q0 2 -5 8"/>
+        </path>
+    </g>
+</svg>

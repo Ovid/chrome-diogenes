@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# Exit on error
+set -e
+
+# Create icons directory if it doesn't exist
+mkdir -p icons
+
+# First ensure the SVG file exists
+if [ ! -f "lantern.svg" ]; then
+    echo "Error: lantern.svg not found"
+    exit 1
+fi
+
+# Convert to different sizes
+# -background none maintains transparency
+# -density 1200 ensures high quality conversion from SVG
+# -resize maintains aspect ratio
+convert -background none -density 1200 lantern.svg -resize 16x16 icons/icon16.png
+convert -background none -density 1200 lantern.svg -resize 32x32 icons/icon32.png
+convert -background none -density 1200 lantern.svg -resize 48x48 icons/icon48.png
+convert -background none -density 1200 lantern.svg -resize 128x128 icons/icon128.png
+
+echo "Conversion complete! Created icons in the icons/ directory:"
+ls -l icons/
+
+# Optional: Verify the files were created with correct dimensions
+identify icons/icon*.png
