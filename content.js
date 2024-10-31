@@ -190,6 +190,16 @@ style.textContent = `
 
 document.head.appendChild(style);
 
+// We ignore the "appeal to authority" fallacy unless the authority is
+// obviously not an expert in the field. This is because the LLM would often
+// cite this an logical flaw if that appeal isn't also backed up by citations.
+// It's not a great way to handle this, but we're still getting strong
+// arguments listed as "weak" due to this.
+//
+// We also ignore numeric information if the numbers are close to the actual
+// numbers. This is because we were getting "factual errors" where "almost two
+// degrees" did not match "1.8 degrees" in the source.
+
 async function analyzeContent(pageContent, apiKey) {
     const prompt = `You are an expert logician, skilled in finding the logical flaws in arguments. You will read the html after the {{HTML}} token and use that for the argument to analyze.
 
@@ -197,13 +207,19 @@ You will break the text up into factual claims and logical reasoning. For factua
 
 You will present your findings in a friendly and accessible markdown format, including a brief summary of the opinion, lists for factual and logical accuracy, and a conclusion rating the argument's strength. It will also provide suggestions for improvement.
 
-If the article you are analyzing is rather long, please only highlight the most important parts of the article because the results sent back to the user will be limited to a certain length.
-
 If the author is citing information that does not have a source listed, DO NOT include that in your response unless it is obviously false. This is because your analysis in the past appears to have listed some arguments as weak, even though if the information is true, the argument would be strong.
+
+If the author is using an "appeal to authority", IGNORE THAT IN YOUR RESPONSE unless the authority is obviously not an expert in the field, or the claim made does not match what the authority would say.
+
+If the author is making a dubious claim, IGNORE THAT IN YOUR RESPONSE if the claim is "close" to reality. For example, if the article says "Since the Industrial Revolution, the global annual temperature has increased in total by a little more than 1 degree Celsius, or about 2 degrees Fahrenheit.", the following would be a bad correction and should be excluded: "The global average temperature has increased by about 1.1 degrees Celsius, or about 2 degrees Fahrenheit, since the late 19th century."
+
+If the author is using a "slippery slope" argument, IGNORE THAT IN YOUR RESPONSE if the conclusion is one that is widely accepted or supported by the authorities cited.
 
 When correcting information, try to include a link to a reliable source.
 
-The conclusion MUST start with "good argument," "average argument," or "weak argument," based on your perception. No argument is a "good argument" if it has a several factual errors, several logical errors, or if there are major, valid counter-arguments which have been ignored. There is no need to be gentle about this. When coming to this conclusion, special attention must be paid to the logical flaws you have found. If there is additional information which is not included in the writing, but which would change the conclusion in the author's writing, please include that in your own conclusion. If there are particular arguments you are aware of which contradict the author's conclusion, please include those in a new section entitled "Counter-Arguments." Otherwise, feel free to omit this section.
+The conclusion MUST start with "good argument," "average argument," or "weak argument," based on your perception. No argument is a "good argument" if it has a several factual errors, several logical errors, or if there are major, valid counter-arguments which have been ignored.  When writing the conclusion, do not claim or consider that there are logical or factual errors if you have not reported them. The conclusion must only be based on the information you have provided.
+
+When coming to this conclusion, special attention must be paid to the logical flaws you have found. If there is additional information which is not included in the writing, but which would change the conclusion in the author's writing, please include that in your own conclusion. If there are particular arguments you are aware of which contradict the author's conclusion, please include those in a new section entitled "Counter-Arguments." Otherwise, feel free to omit this section.
 
 Further, when writing the response, do not assume the user is the author. Instead of "you", write "the author" or something similar.
 
@@ -261,7 +277,7 @@ ${pageContent}`;
                 temperature: 0.7,
                 topK: 40,
                 topP: 0.95,
-                maxOutputTokens: 2048,
+                maxOutputTokens: 4096,
             },
             safetySettings: [
                 {
