@@ -371,8 +371,8 @@ ${pageContent}`;
     document.body.appendChild(resultsDiv);
 
     try {
-        console.log('Sending request to Gemini API...');
-        console.log('Prompt:', prompt);
+        logger.info('Sending request to Gemini API...');
+        logger.info('Prompt:', prompt);
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
 
@@ -408,7 +408,7 @@ ${pageContent}`;
             ]
         };
 
-        console.log('Request body:', requestBody);
+        logger.info('Request body:', requestBody);
 
         const response = await fetch(
             `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`,
@@ -423,10 +423,10 @@ ${pageContent}`;
         );
 
         clearTimeout(timeoutId);
-        console.log('Received response from Gemini API');
+        logger.info('Received response from Gemini API');
 
         const data = await response.json();
-        console.log('Parsed response:', data);
+        logger.info('Parsed response:', data);
 
         if (data.error) {
             if (data.error.details?.[0]?.reason === 'API_KEY_INVALID') {
@@ -442,12 +442,12 @@ ${pageContent}`;
         
         const contentDiv = document.createElement('div');
         const markdownContent = data.candidates[0].content.parts[0].text;
-        console.log('Markdown content:', markdownContent);
+        logger.info('Markdown content:', markdownContent);
         contentDiv.innerHTML = marked.parse(markdownContent);
         resultsDiv.appendChild(contentDiv);
 
     } catch (error) {
-                console.error('Error in analysis:', error);
+                logger.error('Error in analysis:', error);
         loadingDiv.remove();
 
         const errorDiv = document.createElement('div');
@@ -518,12 +518,12 @@ ${pageContent}`;
 
 chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
     if (request.action === 'analyze') {
-        console.log('Received analyze request');
+        logger.info('Received analyze request');
         const pageContent = document.body.innerHTML;
         const { apiKey } = await chrome.storage.local.get('apiKey');
         
         if (!apiKey) {
-            console.error('No API key found');
+            logger.error('No API key found');
             return;
         }
 
