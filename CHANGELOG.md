@@ -13,23 +13,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `Fixed` for any bug fixes.
 * `Security` in case of vulnerabilities.
 
+## [1.1.0] - 2024-10-31
+
+### Added
+
+- We can now have our response in the language of our choice. For now, it's a
+  subset of Germanic and Romance languages because GenAI seems to work better
+  with them. We've tried repeatedly to get it to work with the language the source
+  text is written in, but failed. We're working on it.
+
 ## [1.0.1] - 2024-10-31
+
 ### Changed
+
 - Doubled return tokens to 4096
 - Relaxed safety checks on output (because when you're analyzing content, you
   don't want Gemini saying "no" when you've explicitly asked for an analysis)
 - Added more detail on how to structure the response, starting with a disclaimer
 
 ### Added
+
 - When possible, response now includes links to reliable sources for more information
 
 ## [1.0.0] - 2024-10-30
+
 ### Added
 - Errors now let users see full JSON response
 - Added help page
 - Ability to change or delete API keys
 
 ## No version number - 2024-10-29
+
 ### Added
+
 - Initial feature set
 - README file

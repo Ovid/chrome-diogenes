@@ -169,6 +169,25 @@
       <a class="nav-link" id="helpLink">Help & Instructions</a>
     </div>
 
+    <div class="language-selector">
+      <label for="languageSelect">Response Language:</label>
+      <select id="languageSelect" class="language-select">
+        <!-- 
+            Multiple tries to get this to work have failed. Gemini ain't
+            givin' me no love. I might revisit this by making two passses
+            later. The firs pass would be "what language is this in" and the
+            second pass would be requesting the language.
+            <option value="article">Article Language</option>
+        -->
+        <option value="en" selected>English</option>
+        <option value="fr">French</option>
+        <option value="es">Spanish</option>
+        <option value="pt">Portuguese</option>
+        <option value="it">Italian</option>
+        <option value="de">German</option>
+      </select>
+    </div>
+
     <!-- Help Section -->
     <div id="helpSection" class="help-section">
       <a id="backToMain" class="back-link">Back to Main</a>
