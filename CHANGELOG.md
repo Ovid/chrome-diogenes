@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Doubled return tokens to 4096
 - Relaxed safety checks on output (because when you're analyzing content, you
   don't want Gemini saying "no" when you've explicitly asked for "yes")
+- Added more detail on how to structure the response, starting with a disclaimer
 
 ### Added
 - When possible, response now includes links to reliable sources for more information
