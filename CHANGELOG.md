@@ -14,8 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `Security` in case of vulnerabilities.
 
 ## [1.0.1] - 2024-10-31
-### Changes
+### Changed
 - Doubled return tokens to 4096
+- Relaxed safety checks on output (because when you're analyzing content, you
+  don't want Gemini saying "no" when you've explicitly asked for "yes")
 
 ### Added
 - When possible, response now includes links to reliable sources for more information
