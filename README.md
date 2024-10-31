@@ -111,7 +111,7 @@ This is a _weak argument_. The author makes several inaccurate factual claims an
 
 ---
 
-# Billing
+# Getting an API Key
 
 To use this plugin, you need a Google API Key. You
 can get one at [ai.google.dev](https://ai.google.dev/). Once there,
