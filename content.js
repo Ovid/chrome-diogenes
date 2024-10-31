@@ -186,6 +186,28 @@ style.textContent = `
   color: #1a1a1a;
   margin: 0;
 }
+
+.language-selector {
+  margin: 15px 0;
+  padding: 10px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.language-select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+}
+
+.language-select:focus {
+  outline: none;
+  border-color: #4285f4;
+}
 `;
 
 document.head.appendChild(style);
@@ -201,6 +223,33 @@ document.head.appendChild(style);
 // degrees" did not match "1.8 degrees" in the source.
 
 async function analyzeContent(pageContent, apiKey) {
+  // First, remove any existing analysis windows
+  const existingResults = document.querySelectorAll('.diogenes-results');
+  existingResults.forEach(element => element.remove());
+
+  const { responseLanguage } = await chrome.storage.local.get('responseLanguage');
+  
+  // Add language requirement to prompt
+  let languagePrompt = '';
+  if (responseLanguage === 'article') {
+    languagePrompt = `- YOUR RESPONSE MUST BE WRITTEN IN THE SAME LANGUAGE AS THE ARTICLE.
+- Maintain natural, fluent writing style appropriate for that language.
+- Use appropriate idioms and expressions for that language.`;
+  } else {
+    const languageMap = {
+      'en': 'English',
+      'fr': 'French',
+      'es': 'Spanish',
+      'pt': 'Portuguese',
+      'it': 'Italian',
+      'de': 'German'
+    };
+    language = languageMap[responseLanguage] || 'English';
+    languagePrompt = `Your response MUST be in ${language}.
+- Maintain natural, fluent ${language} writing style
+- Use appropriate ${language} idioms and expressions`;
+  }
+
     const prompt = `You are an expert logician, skilled in finding the logical flaws in arguments. You will read the html after the {{HTML}} token and use that for the argument to analyze.
 
 You will break the text up into factual claims and logical reasoning. For factual claims, it will ignore what appears accurate and check dubious claims against reliable sources, suggesting more accurate information when needed. For logical reasoning, it will identify EVERY logical fallacy and explain it.
@@ -219,6 +268,8 @@ When correcting information, try to include a link to a reliable source.
 
 Structure your response as follows:
 
+${languagePrompt}
+
 All headers must on their own lines, start with a "##", and be followed by a blank line.
 
 The response MUST start with the following disclaimer, using a "Disclaimer" header: "This analysis is provided by Google's Gemini. Generative AI can make mistakes, so please verify the information provided. Further, running this more than once can often give different results."
@@ -234,6 +285,7 @@ When coming to this conclusion, special attention must be paid to the logical fl
 Further, when writing the response, do not assume the user is the author. Instead of "you", write "the author" or something similar.
 
 Please respond ONLY with Markdown.
+
 {{HTML}}
 ${pageContent}`;
 
@@ -274,6 +326,7 @@ ${pageContent}`;
 
     try {
         console.log('Sending request to Gemini API...');
+        console.log('Prompt:', prompt);
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
 

@@ -13,6 +13,35 @@ document.addEventListener('DOMContentLoaded', async () => {
     const backToMain = document.getElementById('backToMain');
     const backToMainBottom = document.getElementById('backToMainBottom');
     const statusDiv = document.getElementById('status');
+    const languageSelect = document.getElementById('languageSelect');
+    
+    // Load saved language preference
+    chrome.storage.local.get('responseLanguage', ({ responseLanguage }) => {
+      if (responseLanguage) {
+        languageSelect.value = responseLanguage;
+      }
+    });
+    
+    // Save language preference when changed
+    languageSelect.addEventListener('change', async () => {
+      await chrome.storage.local.set({ responseLanguage: languageSelect.value });
+    });
+    
+    // Modify the analyze button click handler
+    analyzeButton?.addEventListener('click', async () => {
+      try {
+        const { responseLanguage } = await chrome.storage.local.get('responseLanguage');
+        const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+        chrome.tabs.sendMessage(tab.id, { 
+          action: 'analyze',
+          language: responseLanguage || 'en'
+        });
+        window.close();
+      } catch (error) {
+        console.error('Error during analysis:', error);
+        showStatus('Error analyzing page', true);
+      }
+    });
 
     // Helper function to show status messages
     function showStatus(message, isError = false) {
