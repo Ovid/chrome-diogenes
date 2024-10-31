@@ -19,6 +19,7 @@ a starting point, not a final guide. Generative can AI make mistakes.
 # Features
 
 * Analyze web pages for factual and logical errors
+* Completely free to use
 * No personal data is ever collected
 * Open source with a fair license (MIT)
 * Choose output in a variety of languages (only a subset for now)
