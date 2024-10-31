@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+
+# Exit on any error
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(dirname "$SCRIPT_DIR")"
+OUTPUT_FILE="chrome-diogenes.zip"
+
+# Function to display error messages
+error() {
+    echo "Error: $1" >&2
+    exit 1
+}
+
+# Function to display usage information
+usage() {
+    echo "Usage: $0 [-o output_file.zip]"
+    echo
+    echo "Options:"
+    echo "  -o    Specify output zip file name (default: chrome-diogenes.zip)"
+    echo "  -h    Show this help message"
+}
+
+# Parse command line options
+while getopts "o:h" opt; do
+    case $opt in
+        o)
+            OUTPUT_FILE="$OPTARG"
+            ;;
+        h)
+            usage
+            exit 0
+            ;;
+        \?)
+            usage
+            exit 1
+            ;;
+    esac
+done
+
+# Change to the root directory of the extension
+cd "$ROOT_DIR"
+
+# Check if required files exist
+required_files=(
+    "manifest.json"
+    "background.js"
+    "content.js"
+    "popup.html"
+    "popup.js"
+    "marked.min.js"
+)
+
+for file in "${required_files[@]}"; do
+    if [ ! -f "$file" ]; then
+        error "Required file '$file' not found"
+    fi
+done
+
+# Check if icons directory exists and contains required files
+if [ ! -d "icons" ]; then
+    error "Icons directory not found"
+fi
+
+icon_sizes=(16 32 48 128)
+for size in "${icon_sizes[@]}"; do
+    if [ ! -f "icons/icon${size}.png" ]; then
+        error "Required icon 'icons/icon${size}.png' not found"
+    fi
+done
+
+# Remove existing zip file if it exists
+if [ -f "$OUTPUT_FILE" ]; then
+    rm "$OUTPUT_FILE"
+fi
+
+# Create zip file
+echo "Creating extension package..."
+zip -q -r "$OUTPUT_FILE" \
+    manifest.json \
+    background.js \
+    content.js \
+    popup.html \
+    popup.js \
+    marked.min.js \
+    icons/*.png
+
+echo "Package created successfully: $OUTPUT_FILE"
+echo "Size: $(du -h "$OUTPUT_FILE" | cut -f1)"
