@@ -12,201 +12,247 @@ style.textContent = `
   box-shadow: 0 4px 20px rgba(0,0,0,0.15);
   overflow-y: auto;
   z-index: 10000;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.6;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+  color: #333 !important;
+  box-sizing: border-box !important;
+}
+
+.diogenes-results * {
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-family: inherit !important;
+  line-height: inherit !important;
+}
+
+.diogenes-results h1,
+.diogenes-results h2,
+.diogenes-results h3,
+.diogenes-results h4 {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-weight: 600 !important;
+  color: #1a1a1a !important;
+  margin: 1em 0 0.5em 0 !important;
+}
+
+.diogenes-results h1 { font-size: 1.8em !important; }
+.diogenes-results h2 { font-size: 1.5em !important; }
+.diogenes-results h3 { font-size: 1.3em !important; }
+.diogenes-results h4 { font-size: 1.2em !important; }
+
+.diogenes-results p {
+  margin: 1em 0 !important;
+  color: #2c3e50 !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+}
+
+.diogenes-results ul,
+.diogenes-results ol {
+  margin: 1em 0 !important;
+  padding-left: 2em !important;
+  list-style-position: outside !important;
+}
+
+.diogenes-results ul {
+  list-style-type: disc !important;
+}
+
+.diogenes-results ol {
+  list-style-type: decimal !important;
+}
+
+.diogenes-results li {
+  margin: 0.5em 0 !important;
+  line-height: 1.6 !important;
+}
+
+.diogenes-results blockquote {
+  border-left: 4px solid #e0e0e0 !important;
+  margin: 1em 0 !important;
+  padding: 0.5em 0 0.5em 1em !important;
+  color: #666 !important;
+  background: #f8f9fa !important;
+}
+
+.diogenes-results code {
+  background: #f5f7f9 !important;
+  padding: 0.2em 0.4em !important;
+  border-radius: 3px !important;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+  font-size: 0.9em !important;
+  color: #476582 !important;
+}
+
+.diogenes-results pre {
+  background: #f5f7f9 !important;
+  padding: 1em !important;
+  border-radius: 4px !important;
+  overflow-x: auto !important;
+  margin: 1em 0 !important;
+}
+
+.diogenes-results pre code {
+  padding: 0 !important;
+  background: transparent !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+}
+
+.diogenes-results strong {
+  font-weight: 600 !important;
+  color: #1a1a1a !important;
+}
+
+.diogenes-results em {
+  font-style: italic !important;
+}
+
+.diogenes-results a {
+  color: #0366d6 !important;
+  text-decoration: none !important;
+}
+
+.diogenes-results a:hover {
+  text-decoration: underline !important;
 }
 
 .diogenes-loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  color: #666;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 20px !important;
+  color: #666 !important;
+  font-size: 14px !important;
 }
 
 .diogenes-loading::after {
-  content: '';
-  width: 20px;
-  height: 20px;
-  margin-left: 10px;
-  border: 2px solid #f3f3f3;
-  border-top: 2px solid #3498db;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+  content: '' !important;
+  width: 20px !important;
+  height: 20px !important;
+  margin-left: 10px !important;
+  border: 2px solid #f3f3f3 !important;
+  border-top: 2px solid #3498db !important;
+  border-radius: 50% !important;
+  animation: diogenesSpinner 1s linear infinite !important;
 }
 
-@keyframes spin {
+@keyframes diogenesSpinner {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
 .diogenes-error {
-  color: #dc3545;
-  padding: 16px;
-  margin: 10px 0;
-  background: #f8d7da;
-  border-radius: 4px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  font-family: system-ui, -apple-system, sans-serif;
+  color: #dc3545 !important;
+  padding: 16px !important;
+  margin: 10px 0 !important;
+  background: #f8d7da !important;
+  border-radius: 4px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
 }
 
 .diogenes-error a {
-  color: #dc2626;
-  text-decoration: underline;
-  margin-top: 10px;
-  cursor: pointer;
+  color: #dc2626 !important;
+  text-decoration: underline !important;
+  margin-top: 10px !important;
 }
 
 .diogenes-error a:hover {
-  color: #b91c1c;
+  color: #b91c1c !important;
 }
 
 .diogenes-json-container {
-  width: 100%;
-  margin-top: 12px;
+  width: 100% !important;
+  margin-top: 12px !important;
 }
 
 .diogenes-json-toggle {
-  background: none;
-  border: 1px solid #dc3545;
-  color: #dc3545;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 12px;
-  margin-bottom: 8px;
+  background: none !important;
+  border: 1px solid #dc3545 !important;
+  color: #dc3545 !important;
+  padding: 6px 12px !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  font-size: 12px !important;
+  margin-bottom: 8px !important;
 }
 
 .diogenes-json-toggle:hover {
-  background: rgba(220, 53, 69, 0.1);
+  background: rgba(220, 53, 69, 0.1) !important;
 }
 
 .diogenes-json-content {
-  background: #fff;
-  border: 1px solid #dc3545;
-  border-radius: 4px;
-  padding: 12px;
-  font-family: monospace;
-  font-size: 12px;
-  white-space: pre-wrap;
-  word-break: break-all;
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.diogenes-retry-link {
-  color: #dc2626;
-  text-decoration: underline;
-  margin-top: 12px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.diogenes-retry-link:hover {
-  color: #b91c1c;
-}
-
-.diogenes-results h1 { font-size: 1.8em; margin: 0.8em 0; }
-.diogenes-results h2 { font-size: 1.5em; margin: 0.7em 0; }
-.diogenes-results h3 { font-size: 1.3em; margin: 0.6em 0; }
-.diogenes-results h4 { font-size: 1.2em; margin: 0.5em 0; }
-
-.diogenes-results p {
-  margin: 1em 0;
-  color: #2c3e50;
-}
-
-.diogenes-results ul, .diogenes-results ol {
-  margin: 1em 0;
-  padding-left: 2em;
-}
-
-.diogenes-results li {
-  margin: 0.5em 0;
-}
-
-.diogenes-results blockquote {
-  border-left: 4px solid #e0e0e0;
-  margin: 1em 0;
-  padding-left: 1em;
-  color: #666;
-}
-
-.diogenes-results code {
-  background: #f5f7f9;
-  padding: 0.2em 0.4em;
-  border-radius: 3px;
-  font-family: monospace;
-  font-size: 0.9em;
-}
-
-.diogenes-results pre code {
-  display: block;
-  padding: 1em;
-  overflow-x: auto;
-}
-
-.diogenes-results strong {
-  color: #1a1a1a;
+  background: #fff !important;
+  border: 1px solid #dc3545 !important;
+  border-radius: 4px !important;
+  padding: 12px !important;
+  font-family: monospace !important;
+  font-size: 12px !important;
+  white-space: pre-wrap !important;
+  word-break: break-all !important;
+  max-height: 300px !important;
+  overflow-y: auto !important;
 }
 
 .diogenes-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  border: none;
-  background: none;
-  font-size: 20px;
-  cursor: pointer;
-  color: #666;
-  padding: 5px 10px;
-  border-radius: 4px;
-  transition: all 0.2s ease;
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  border: none !important;
+  background: none !important;
+  font-size: 20px !important;
+  cursor: pointer !important;
+  color: #666 !important;
+  padding: 5px 10px !important;
+  border-radius: 4px !important;
+  transition: all 0.2s ease !important;
 }
 
 .diogenes-close:hover {
-  background: #f5f5f5;
-  color: #333;
+  background: #f5f5f5 !important;
+  color: #333 !important;
 }
 
 .diogenes-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #eee;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 15px !important;
+  padding-bottom: 10px !important;
+  border-bottom: 1px solid #eee !important;
 }
 
 .diogenes-title {
-  font-size: 1.2em;
-  font-weight: 600;
-  color: #1a1a1a;
-  margin: 0;
+  font-size: 1.2em !important;
+  font-weight: 600 !important;
+  color: #1a1a1a !important;
+  margin: 0 !important;
 }
 
 .language-selector {
-  margin: 15px 0;
-  padding: 10px;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  margin: 15px 0 !important;
+  padding: 10px !important;
+  border-top: 1px solid #eee !important;
+  border-bottom: 1px solid #eee !important;
 }
 
 .language-select {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
-  background-color: white;
+  width: 100% !important;
+  padding: 8px !important;
+  margin-top: 5px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 4px !important;
+  font-size: 14px !important;
+  background-color: white !important;
 }
 
 .language-select:focus {
-  outline: none;
-  border-color: #4285f4;
+  outline: none !important;
+  border-color: #4285f4 !important;
 }
 `;
 

@@ -25,6 +25,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Make sure previous analysis window is cleared before running a new one
+- Updated the CSS to ensure we have consistent formatting and don't pick
+  up the style of the source text
 
 ## [1.0.1] - 2024-10-31
 
