@@ -13,6 +13,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `Fixed` for any bug fixes.
 * `Security` in case of vulnerabilities.
 
+## [1.2.0] - 2024-10-31
+
+### Fixed
+
+- Added CONTRIBUTING.md file to help contributors understand how to contribute
+- Logging is now disabled in production. You can enable it by creating an
+  empty `devel` file in the project root directory. This file is in the `.gitignore`
+  file to ensure it's not accidentally committed.
+
 ## [1.1.0] - 2024-10-31
 
 ### Added

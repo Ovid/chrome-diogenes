@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
         window.close();
       } catch (error) {
-        console.error('Error during analysis:', error);
+        logger.error('Error during analysis:', error);
         showStatus('Error analyzing page', true);
       }
     });
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 showStatus('Invalid API key', true);
             }
         } catch (error) {
-            console.error('Error saving API key:', error);
+            logger.error('Error saving API key:', error);
             showStatus('Error saving API key', true);
         }
     });
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             apiKeyForm.style.display = 'block';
             showStatus('API key deleted successfully');
         } catch (error) {
-            console.error('Error deleting API key:', error);
+            logger.error('Error deleting API key:', error);
             showStatus('Error deleting API key', true);
         }
     });
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             chrome.tabs.sendMessage(tab.id, { action: 'analyze' });
             window.close();
         } catch (error) {
-            console.error('Error during analysis:', error);
+            logger.error('Error during analysis:', error);
             showStatus('Error analyzing page', true);
         }
     });

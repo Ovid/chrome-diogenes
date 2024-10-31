@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Diogenes",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Logical analysis of web content using Google's Gemini API",
   "icons": {
     "16": "icons/icon16.png",
@@ -30,12 +30,12 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["marked.min.js", "content.js"]
+      "js": [ "logger.js", "marked.min.js", "content.js"]
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": ["marked.min.js"],
+      "resources": ["devel", "marked.min.js"],
       "matches": ["<all_urls>"]
     }
   ]
