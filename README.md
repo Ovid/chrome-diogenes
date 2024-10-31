@@ -43,6 +43,8 @@ See "Billing" at the bottom of this document for more information.
 This key is stored in your browser's local storage and is used to make
 requests. It is not shared with anyone.
 
+You can replace or delete your key at any time.
+
 # Screenshot
 
 The following screenshot shows an example of the output. Of course, in real life,
