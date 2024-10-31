@@ -16,6 +16,14 @@ response from the API.
 Of course, because this is driven by an LLM, you should consider the results to
 a starting point, not a final guide. Generative can AI make mistakes.
 
+# Features
+
+* Analyze web pages for factual and logical errors
+* No personal data is ever collected
+* Open source with a fair license (MIT)
+* Choose output in a variety of languages (only a subset for now)
+* When possible, links are provided to reliable source material explaining factual errors
+
 # License
 
 This project is licensed under the MIT license.
