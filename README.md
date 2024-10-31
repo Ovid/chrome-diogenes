@@ -22,7 +22,7 @@ a starting point, not a final guide. Generative can AI make mistakes.
 * No personal data is ever collected
 * Open source with a fair license (MIT)
 * Choose output in a variety of languages (only a subset for now)
-* When possible, links are provided to reliable source material explaining factual errors
+* When possible, links are provided to reliable source material explaining factual errors (not shown in our example below, from an earlier version)
 
 # License
 
