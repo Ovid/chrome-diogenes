@@ -22,6 +22,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   with them. We've tried repeatedly to get it to work with the language the source
   text is written in, but failed. We're working on it.
 
+### Fixed
+
+- Make sure previous analysis window is cleared before running a new one
+
 ## [1.0.1] - 2024-10-31
 
 ### Changed

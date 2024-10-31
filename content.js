@@ -223,6 +223,10 @@ document.head.appendChild(style);
 // degrees" did not match "1.8 degrees" in the source.
 
 async function analyzeContent(pageContent, apiKey) {
+  // First, remove any existing analysis windows
+  const existingResults = document.querySelectorAll('.diogenes-results');
+  existingResults.forEach(element => element.remove());
+
   const { responseLanguage } = await chrome.storage.local.get('responseLanguage');
   
   // Add language requirement to prompt
