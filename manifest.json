@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Diogenes",
-  "version": "1.0",
+  "version": "1.0.1",
   "description": "Logical analysis of web content using Google's Gemini API",
   "icons": {
     "16": "icons/icon16.png",
