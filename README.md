@@ -29,6 +29,9 @@ This project is licensed under the MIT license.
 5. Select the folder where you cloned the repository
 6. You should see the Diogenes icon in the top right corner of your browser
 
+This has also been submitted to the Chrome store, but it often takes weeks
+to get a review.
+
 # Usage
 
 When you first run the plugin, you will be asked to provide an API key. You
