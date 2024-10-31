@@ -36,8 +36,7 @@ If you don't know how to clone a repository, scroll to the top and click
 on the big, green "<> Code" button. From there, click on "Download Zip."
 Unzip the resulting file and continue to step 2 above.
 
-![image](https://github.com/user-attachments/assets/fa81e903-75a1-4182-81d5-b745125e7ce4)
-
+<img src="https://github.com/user-attachments/assets/fa81e903-75a1-4182-81d5-b745125e7ce4" width="400">
 
 # Usage
 
@@ -58,7 +57,7 @@ The following screenshot shows an example of the output. Of course, in real life
 you'd want to scroll down to see the full analysis of the argument, which I've
 included below the screenshot.
 
-<img width="1444" alt="Screenshot 2024-10-29 at 18 20 02" src="https://github.com/user-attachments/assets/cdc82473-7d33-44c7-8e10-258b36e75cc0">
+<img width="600" alt="Screenshot 2024-10-29 at 18 20 02" src="https://github.com/user-attachments/assets/cdc82473-7d33-44c7-8e10-258b36e75cc0">
 
 # Example Response
 
@@ -124,11 +123,11 @@ To use this plugin, you need a Google API Key. You
 can get one at [ai.google.dev](https://ai.google.dev/). Once there,
 click the link which reads "Get API Key in Google AI Studio".
 
-![image](https://github.com/user-attachments/assets/fc44554e-81f5-4c25-8763-38227be209e3)
+<img width="600" alt="Screenshot 2024-10-29 at 18 20 02" src="https://github.com/user-attachments/assets/fc44554e-81f5-4c25-8763-38227be209e3">
 
 On the following page, click "Create API Key."
 
-![image](https://github.com/user-attachments/assets/2d46c1e2-5f7f-4b50-b257-616a05cc5fde)
+<img width="600" alt="Screenshot 2024-10-29 at 18 20 02" src="https://github.com/user-attachments/assets/2d46c1e2-5f7f-4b50-b257-616a05cc5fde">
 
 This key is free to use! No costs to you for this service. However, the number of requests
 you can make are limited. If you use this frequently, click the "Go to Billing" link at the
