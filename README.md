@@ -1,6 +1,6 @@
 # Diogenes
 
-A Chrome plugin to help you search for truth.
+A Chrome extension to help you search for truth.
 
 # Rationale
 
