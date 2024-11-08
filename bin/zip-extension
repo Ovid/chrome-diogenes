@@ -50,6 +50,7 @@ required_files=(
     "popup.html"
     "popup.js"
     "marked.min.js"
+    "logger.js"
 )
 
 for file in "${required_files[@]}"; do
