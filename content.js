@@ -258,6 +258,65 @@ style.textContent = `
 
 document.head.appendChild(style);
 
+// Flag to track if analysis is in progress
+let isAnalyzing = false;
+
+// Debounce function to prevent multiple rapid calls
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+async function analyzeContent(pageContent, apiKey) {
+  // If analysis is already in progress, don't start another one
+  if (isAnalyzing) {
+    logger.info('Analysis already in progress, skipping...');
+    return;
+  }
+
+  try {
+    isAnalyzing = true;
+
+    // First, remove any existing analysis windows
+    const existingResults = document.querySelectorAll('.diogenes-results');
+    existingResults.forEach(element => element.remove());
+
+    // Rest of your existing analyzeContent function...
+    // [Keep all the existing code here]
+
+  } catch (error) {
+    // Your existing error handling code...
+  } finally {
+    isAnalyzing = false;
+  }
+}
+
+// Wrap the message listener in a debounced function
+const debouncedAnalyzeContent = debounce(async (pageContent, apiKey) => {
+  await analyzeContent(pageContent, apiKey);
+}, 250); // 250ms debounce time
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === 'analyze') {
+    logger.info('Received analyze request');
+    const pageContent = document.body.innerHTML;
+    chrome.storage.local.get('apiKey').then(({ apiKey }) => {
+      if (!apiKey) {
+        logger.error('No API key found');
+        return;
+      }
+      debouncedAnalyzeContent(pageContent, apiKey);
+    });
+  }
+});
+
 // We ignore the "appeal to authority" fallacy unless the authority is
 // obviously not an expert in the field. This is because the LLM would often
 // cite this an logical flaw if that appeal isn't also backed up by citations.

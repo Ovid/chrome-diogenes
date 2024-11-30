@@ -18,7 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-Fix bug where logger.js wasn't really added to the extension package :/
+- Fix race condition in the analysis window. We had multiple copies.
+- Fix bug where logger.js wasn't really added to the extension package :/
+
+## [1.2.1] - 2024-11-08
 
 ### Fixed
 
