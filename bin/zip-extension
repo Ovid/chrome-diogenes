@@ -82,6 +82,7 @@ zip -q -r "$OUTPUT_FILE" \
     manifest.json \
     background.js \
     content.js \
+    logger.js \
     popup.html \
     popup.js \
     marked.min.js \

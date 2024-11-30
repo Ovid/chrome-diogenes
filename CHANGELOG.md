@@ -14,7 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `Security` in case of vulnerabilities.
 
 
-## [1.2.1] - 2024-11-08
+## [1.2.2] - 2024-11-30
+
+### Fixed
+
+Fix bug where logger.js wasn't really added to the extension package :/
 
 ### Fixed
 
