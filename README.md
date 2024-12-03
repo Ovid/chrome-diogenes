@@ -2,6 +2,8 @@
 
 A Chrome extension to help you search for truth.
 
+You can install the plugin locally, [or from the Chrome Web store](https://chromewebstore.google.com/detail/diogenes/ejclefajnpagdpfafajggddaakdiacfe).
+
 # Rationale
 
 In a world rich in disinformation, friend love to send us articles on the web that,
